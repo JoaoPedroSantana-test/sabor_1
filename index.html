@@ -1,17 +1,203 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>saborzinho</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saborzinho (Estilo Mangá)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f8f8f8;
+      --ink:#0b0b0b;
+      --panel-border:6px;
+      --gutter:18px;
+    }
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(0,0,0,0.06) 0px, rgba(0,0,0,0.06) 1px, transparent 2px),
+        radial-gradient(circle at 90% 80%, rgba(0,0,0,0.04) 0px, rgba(0,0,0,0.04) 1px, transparent 2px),
+        linear-gradient(180deg, #fff 0%, #f2f2f2 100%);
+      background-size: 6px 6px, 8px 8px, auto;
+      color:var(--ink);
+      -webkit-font-smoothing:antialiased;
+      padding:var(--gutter);
+    }
+
+    header{
+      text-align:center;
+      margin-bottom:20px;
+    }
+    h1{
+      font-family: 'Permanent Marker', cursive;
+      font-size:48px;
+      margin:0;
+      color:var(--ink);
+      letter-spacing:1px;
+      text-transform:uppercase;
+      filter: drop-shadow(2px 3px rgba(0,0,0,0.15));
+    }
+    .subtitle{
+      font-weight:700;
+      margin-top:6px;
+      font-size:14px;
+      color:#333;
+    }
+
+    /* Grid of panels like mangá (vertical reading) */
+    .manga{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:var(--gutter);
+      max-width:900px;
+      margin:0 auto 60px;
+    }
+
+    .panel{
+      background:#fff;
+      border:var(--panel-border) solid var(--ink);
+      padding:18px;
+      position:relative;
+      box-shadow: 0 8px 0 rgba(0,0,0,0.06);
+      overflow:hidden;
+    }
+
+    /* halftone overlay for panels */
+    .panel::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 2px);
+      background-size:6px 6px;
+      mix-blend-mode:multiply;
+      opacity:0.6;
+      pointer-events:none;
+    }
+
+    /* speech bubble */
+    .bubble{
+      display:inline-block;
+      background:#fff;
+      border:4px solid var(--ink);
+      padding:12px 18px;
+      border-radius:20px;
+      position:relative;
+      font-weight:700;
+      max-width:70%;
+      box-shadow: 6px 8px 0 rgba(0,0,0,0.08);
+    }
+    .bubble.small{font-size:14px;padding:8px 10px;border-radius:14px}
+    /* bubble tail */
+    .bubble.tail::after{
+      content:"";
+      position:absolute;
+      left:18px;
+      bottom:-14px;
+      width:0;height:0;
+      border-left:12px solid transparent;
+      border-right:12px solid transparent;
+      border-top:14px solid #fff;
+      filter: drop-shadow(0 -2px rgba(0,0,0,0.06));
+    }
+    .bubble.tail::before{
+      content:"";
+      position:absolute;
+      left:12px;
+      bottom:-18px;
+      width:0;height:0;
+      border-left:16px solid transparent;
+      border-right:16px solid transparent;
+      border-top:18px solid var(--ink);
+      z-index:-1;
+    }
+
+    /* big screentone effect for dramatic panels */
+    .dramatic{
+      background:linear-gradient(180deg,#fff 0%, #fafafa 100%);
+      color:var(--ink);
+    }
+    .dramatic .big-text{
+      font-family: 'Permanent Marker', cursive;
+      font-size:36px;
+      text-transform:uppercase;
+      letter-spacing:2px;
+    }
+
+    /* small caption boxes */
+    .caption{
+      display:inline-block;
+      background:#fff;
+      border:2px solid var(--ink);
+      padding:6px 10px;
+      font-size:12px;
+      border-radius:6px;
+      margin-bottom:8px;
+    }
+
+    /* footer */
+    footer{
+      text-align:center;
+      color:#555;
+      font-size:13px;
+      margin-top:30px;
+    }
+
+    /* responsive tweaks */
+    @media(min-width:700px){
+      .manga{grid-template-columns: 1fr 1fr;}
+      .panel{min-height:180px}
+    }
+    @media(min-width:1100px){
+      .manga{grid-template-columns: repeat(3,1fr);}
+    }
+  </style>
 </head>
-<h1>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt in nisi hic rerum officia velit dolore vero, officiis, repudiandae quos iure! Similique dolorum laboriosam voluptatum esse deleniti, perspiciatis dolorem itaque!
-    <hr>
-
-
-</h1>
 <body>
-    
+  <header>
+    <h1>Saborzinho</h1>
+    <div class="subtitle">Uma página com estilo mangá — preto & branco, painéis e balões</div>
+  </header>
+
+  <main class="manga">
+    <article class="panel">
+      <div class="caption">Cena 1 — Abertura</div>
+      <p style="margin-top:8px;font-weight:700;">No pequeno bairro, um cheirinho irresistível... </p>
+      <div style="margin-top:18px;">
+        <span class="bubble tail">Que cheiro é esse?!</span>
+      </div>
+    </article>
+
+    <article class="panel dramatic">
+      <div class="big-text">Sabor!</div>
+      <p style="margin-top:12px;">Um instante que muda tudo.</p>
+    </article>
+
+    <article class="panel">
+      <div class="caption">Cena 2 — Encontro</div>
+      <p style="margin-top:8px;">Dois personagens se encontram na esquina. Expressões fortes são mostradas em close.</p>
+      <div style="margin-top:18px;display:flex;gap:12px;align-items:flex-end;">
+        <span class="bubble small tail">Oi!</span>
+        <span class="bubble small tail">Você trouxe aquele tempero?</span>
+      </div>
+    </article>
+
+    <article class="panel">
+      <div class="caption">Cena 3 — Final</div>
+      <p style="margin-top:8px;">Risos, aroma e o convite: venha provar.</p>
+      <div style="margin-top:18px;">
+        <span class="bubble tail">Vem cá, experimente meu novo prato!</span>
+      </div>
+    </article>
+
+    <article class="panel dramatic">
+      <p class="big-text">FIM</p>
+    </article>
+  </main>
+
+  <footer>
+    <div>Créditos: layout criado automaticamente</div>
+  </footer>
 </body>
 </html>
